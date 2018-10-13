@@ -1,6 +1,7 @@
 import sys
 import spotipy
 import spotipy.util as util
+from parser import parse
 
 commands = []
 
@@ -26,4 +27,4 @@ if token:
 					'artist': track['artists'][0]['name'],
 					'album': track['album']['name']})
 
-print(commands)
+parse(commands)
