@@ -41,7 +41,7 @@ def parse(inputs):
 				while 'Run' not in inputs[index]['name']:
 					index -= 1
 		# Take the next song and set the data location to the first letter of it
-		elif len(inputs[index]['album'].split()[0]) < 5:
+		elif len(inputs[index]['album'].split()[0]) < 7:
 			index += 1
 			data[location] = ord(inputs[index]['name'][0])
 		# Move to next index
