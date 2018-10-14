@@ -25,4 +25,4 @@ If a song's album's first word has length less than 5, and does not satisfy any 
 ## Setup
 `spet` requires a Spotify premium account to connect with the API. To set up `spet`'s interpreter, clone the repo and do a `pip install -r requirements.txt`. Then, [create a Spotify API key](https://developer.spotify.com/dashboard/applications) and set the redirect URL to something like `http://localhost:8888/callback`.
 
-To run `spet`, `cd` into the `spet` directory and run `python3 main.py <username> <playlist_uri>`. The playlist URI can be found on the Spotify app's Share button, and looks something like `7hShQSKY5AU0YQaN833iEx`.
+To run `spet`, `cd` into the `spet` directory and run `python3 spet.py <username> <playlist_uri>`. The playlist URI can be found on the Spotify app's Share button, and looks something like `7hShQSKY5AU0YQaN833iEx`.
