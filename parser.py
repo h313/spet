@@ -1,11 +1,12 @@
 def parse(inputs):
 	index = 0
 	location = 0
+	pri = ''
 	data = [0 for i in range(40000)]
 	while(index < len(inputs)):
 		# Print character at location
 		if inputs[index]['album'] == 'Your Name.':
-			print(chr(data[location]))
+			pri += chr(data[location])
 		# Input characters
 		elif inputs[index]['artist'] == 'Coldplay':
 			inp = input()
@@ -46,3 +47,5 @@ def parse(inputs):
 			data[location] = ord(inputs[index]['name'][0])
 		# Move to next index
 		index += 1
+
+	print(pri)
