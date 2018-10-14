@@ -1,37 +1,20 @@
-## Welcome to GitHub Pages
+## Language Definition
+The `spet` language is loosely based off of the brainfuck language. The interpreter reads the playlist from the top down. Various attributes of the song, sorted in terms of importance, defines the behaviours of the songs. The data land is a list of 40000 bytes, which can be navigated through with a pointer. From top down, the songs evaluate to:
+ 
+### Print Character
+Any song from RADWIMPS' Your Name album prints the character at the pointer location.
 
-You can use the [editor on GitHub](https://github.com/h313/spet/edit/gh-pages/README.md) to maintain and preview the content for your website in Markdown files.
+### Input Character
+Any song by Coldplay grabs input from `stdin` depending on the number of letters in the first word of the song. For example, A Sky Full of Stars will take only the first letter of whatever input is in `stdin` and write it to the location of the pointer. However, Yellow will take the first six letters of `stdin` and write it, starting at the pointer location. The pointer stays at its position befure the input is called.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Moving the pointer
+Any song by Radiohead moves a pointer forward by `1` byte, while any song by Green Day moves a pointer back `1` byte.
 
-### Markdown
+### Incrementing and Decrementing a value
+Any song from the Muse album `Drones` will decrement the value at the pointer by `1`, while any song from the Muse album `Origin of Symmetry` increments the value at the pointer by `1`. Decrementing causes the value to wrap around, so decrementing a `0` results in a `255`, while incrementing a `255` results in a `0`.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Loops
+If a song contains the word `Run` in its name, and if the data at the pointer is `0`, the program jumps forward to the song directly following the next song containing the word `Talk` in its name. If a song contains the word `Talk` in its name, and if the data at the pointer is nonzero, the program jumps back to the song directly in front of the nearest song containing the word `Run`.
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/h313/spet/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### Setting values
+If a song's album's first word has length less than 5, and does not satisfy any of the above definitions, the data at the pointer is set to the first character of the next song.
