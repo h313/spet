@@ -43,6 +43,6 @@ def parse(inputs):
 		# Take the next song and set the data location to the first letter of it
 		elif len(inputs[index]['album'].split()[0]) < 5:
 			index += 1
-			data[location] = inputs[index]['name'][0]
+			data[location] = ord(inputs[index]['name'][0])
 		# Move to next index
 		index += 1
