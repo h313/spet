@@ -14,6 +14,8 @@ def parse(inputs):
 			for i in range(0, max):
 				data[location] = ord(inp[i])
 				location += 1
+				if location >= 40000:
+					location = 0
 			location -= max
 		# Move pointer forward
 		elif inputs[index]['artist'] == 'Radiohead':
