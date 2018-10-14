@@ -18,9 +18,13 @@ def parse(inputs):
 		# Move pointer forward
 		elif inputs[index]['artist'] == 'Radiohead':
 			location += 1
+			if location >= 40000:
+				location = 0
 		# Move pointer backward
 		elif inputs[index]['artist'] == 'Green Day':
 			location -= 1
+			if location <= 0:
+				location = 39999
 		# Increment
 		elif inputs[index]['album'] == 'Origin of Symmetry':
 			data[location] += 1
