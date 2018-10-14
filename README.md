@@ -1,8 +1,8 @@
 # About
-`spet` is an interpreter for a turing-complete programming language based on Spotify playlists.
+`spet` is an interpreter for a turing-complete programming language loosely based off of brainfuck based on Spotify playlists.
 
 ## Language Definition
-The `spet` language is loosely based off of the brainfuck language. The interpreter reads the playlist from the top down. Various attributes of the song, sorted in terms of importance, defines the behaviours of the songs. The data land is a list of 40000 bytes, which can be navigated through with a pointer. From top down, the songs evaluate to:
+The interpreter reads the playlist from the top down. Various attributes of the song, sorted in terms of importance, defines the behaviours of the songs. The data land is a list of 40000 bytes, which can be navigated through with a pointer. From top down, the songs evaluate to:
  
 ### Print Character
 Any song from RADWIMPS' album `Your Name.` prints the character at the pointer location.
