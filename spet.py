@@ -1,30 +1,67 @@
 import sys
+import os
+import argparse
+
 import spotipy
 import spotipy.util as util
 from parser import parse
 
-commands = []
+scope = "playlist-read-collaborative"
 
-if len(sys.argv) > 2:
-	playlist_id = sys.argv[2]
-	username = sys.argv[1]
-else:
-	print("Usage: %s username playlist_id")
-	sys.exit()
+def login(username) -> str:
+	return util.prompt_for_user_token(
+    	username,
+    	scope,
+    	client_id= os.getenv("SPOTIPY_CLIENT_ID") or "47085e9bfd4c40b986d599a311a1f6be",
+    	client_secret= os.getenv("SPOTIPY_CLIENT_SECRET") or "d9efc8f758e5449bb7516e6f2f90e1e5",
+    	redirect_uri= os.getenv("SPOTIPY_REDIRECT_URI") or "http://localhost:8888/callback",
+	)
 
-token = util.prompt_for_user_token(username,'playlist-read-collaborative')
 
-if token:
+def get_commands_playlists(token, username, playlist_id):
+	commands = []
 	sp = spotipy.Spotify(auth=token)
 	playlists = sp.user_playlists(username)
-	for playlist in playlists['items']:
-		if playlist_id == playlist['id']:
-			result_list = sp.user_playlist(username, playlist['id'],
-				fields="tracks,next")
-			for i, item in enumerate(result_list['tracks']['items']):
-				track = item['track']
-				commands.append({'name': track['name'],
-					'artist': track['artists'][0]['name'],
-					'album': track['album']['name']})
 
-parse(commands)
+	playlist = next((p for p in playlists["items"] if p["id"] == playlist_id), None)
+	if playlist:
+		result_list = sp.user_playlist(
+			username, playlist["id"], fields="tracks,next"
+		)
+		for i, item in enumerate(result_list["tracks"]["items"]):
+			track = item["track"]
+			commands.append(
+				{
+					"name": track["name"],
+					"artist": track["artists"][0]["name"],
+					"album": track["album"]["name"],
+				}
+			)
+		parse(commands)
+	else:
+		print("Playlist not found")
+
+
+def get_playlists(token, username):
+	sp = spotipy.Spotify(auth=token)
+	playlists = sp.user_playlists(username)
+
+	for playlist in playlists["items"]:
+		print(f"id: {playlist.get('id')} name: {playlist.get('name')}")
+
+
+if __name__ == "__main__":
+	parser = argparse.ArgumentParser()
+	parser.add_argument("username", help="spotify username")
+	parser.add_argument("--display-playlists", help="display playlist", action="store_true")
+	parser.add_argument("-p", "--playlist-id", help="playlist ID", type=str)
+
+	args = parser.parse_args()
+
+	if args.display_playlists:
+		get_playlists(login(args.username), args.username)
+		sys.exit()
+
+	if args.playlist_id:
+		get_commands_playlists(login(args.username), args.username, args.playlist_id)
+		sys.exit()
