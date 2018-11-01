@@ -28,12 +28,12 @@ def parse(inputs):
 			if location <= 0:
 				location = 39999
 		# Increment
-		elif inputs[index]['album'] == 'Origin of Symmetry':
+		elif inputs[index]['album'] == 'Origin of Symmetry' and inputs[index]['artist'] == 'Muse':
 			data[location] += 1
 			if data[location] > 255:
 				data[location] -= 256
 		# Decrement
-		elif inputs[index]['album'] == 'Drones':
+		elif inputs[index]['album'] == 'Drones' and inputs[index]['artist'] == 'Muse':
 			data[location] -= 1
 			if data[location] < 0:
 				data[location] += 256
