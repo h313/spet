@@ -1,3 +1,6 @@
+match_loops = [];
+bracket_stack = [];
+
 def parse(inputs):
 	index = 0
 	location = 0
@@ -39,14 +42,14 @@ def parse(inputs):
 				data[location] += 256
 		# Analogue of the `[` brainfuck command
 		elif 'Run' in inputs[index]['name']:
+			bracket_stack.append(index)
 			if data[location] == 0:
 				while 'Talk' not in inputs[index]['name']:
 					index += 1
 		# Analogue of the `]` brainfuck command
 		elif 'Talk' in inputs[index]['name']:
 			if data[location] != 0:
-				while 'Run' not in inputs[index]['name']:
-					index -= 1
+				index = bracket_stack.pop()
 		# Take the next song and set the data location to the first letter of it
 		elif len(inputs[index]['album'].split()[0]) < 7:
 			index += 1
