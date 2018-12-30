@@ -18,7 +18,7 @@ Any song by Radiohead moves a pointer forward by `1` byte, while any song by Gre
 Any song from the Muse album `Drones` will decrement the value at the pointer by `1`, while any song from the Muse album `Origin of Symmetry` increments the value at the pointer by `1`. Decrementing causes the value to wrap around, so decrementing a `0` results in a `255`, while incrementing a `255` results in a `0`.
 
 ### Loops
-If a song contains the word `Run` in its name, and if the data at the pointer is `0`, the program jumps forward to the song directly following the next song containing the word `Talk` in its name. If a song contains the word `Talk` in its name, and if the data at the pointer is nonzero, the program jumps back to the song directly in front of the nearest song containing the word `Run`.
+If a song contains the word `Run` in its name, and if the data at the pointer is `0`, the program jumps forward to the song directly following the next song containing the word `Talk` in its name. If a song contains the word `Talk` in its name, and if the data at the pointer is nonzero, the program jumps back to the corresponding song containing the word `Run`.
 
 ### Setting values
 If a song's album's first word has length less than `7`, and does not satisfy any of the above definitions, the data at the pointer is set to the first character of the next song.
