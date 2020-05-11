@@ -3,7 +3,7 @@
 licensed under the GPLv3.
 
 ## Language Definition
-The interpreter reads the playlist from the top down. Various attributes of the song, sorted in terms of importance, defines the behaviours of the songs. The data land is a list of 40000 bytes, which can be navigated through with a pointer. From top down, the songs evaluate to:
+The interpreter reads the playlist from the top down. Various attributes of the song, sorted in terms of importance, defines the behaviours of the songs. The data land is a list of 40000 bytes, which can be navigated through with a pointer. From most important to least important, the songs evaluate to:
  
 ### Print Character
 Any song from RADWIMPS' album `Your Name.` prints the character at the pointer location.
