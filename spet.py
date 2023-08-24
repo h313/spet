@@ -12,9 +12,9 @@ def login(username) -> str:
 	return util.prompt_for_user_token(
     	username,
     	scope,
-    	client_id= os.getenv("SPOTIPY_CLIENT_ID") or "47085e9bfd4c40b986d599a311a1f6be",
-    	client_secret= os.getenv("SPOTIPY_CLIENT_SECRET") or "d9efc8f758e5449bb7516e6f2f90e1e5",
-    	redirect_uri= os.getenv("SPOTIPY_REDIRECT_URI") or "http://localhost:8888/callback",
+    	client_id= os.getenv("SPOTIPY_CLIENT_ID"),
+    	client_secret= os.getenv("SPOTIPY_CLIENT_SECRET"),
+    	redirect_uri= os.getenv("SPOTIPY_REDIRECT_URI"),
 	)
 
 
